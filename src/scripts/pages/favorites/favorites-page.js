@@ -17,8 +17,7 @@ class FavoritesPage {
   async afterRender() {
     const favoriteListContainer = document.getElementById('favorite-list');
     const searchInput = document.getElementById('search-favorite');
-    
-    // Fungsi untuk merender cerita ke DOM
+
     const renderStories = (stories) => {
       favoriteListContainer.innerHTML = '';
       if (stories.length === 0) {
@@ -44,34 +43,29 @@ class FavoritesPage {
       });
     };
 
-    // --- Ambil dan tampilkan semua data favorit ---
     let allFavoriteStories = await DatabaseHelper.getAllStories();
     renderStories(allFavoriteStories);
 
-    // --- Logika untuk tombol Unfavorite (Delete) ---
     favoriteListContainer.addEventListener('click', async (event) => {
       const unfavoriteButton = event.target.closest('.unfavorite-btn');
       if (unfavoriteButton) {
         const storyId = unfavoriteButton.dataset.id;
-        
-        // Hapus dari IndexedDB
+
         await DatabaseHelper.deleteStory(storyId);
-        
-        // Hapus elemen dari tampilan secara langsung
+
         const storyElement = document.querySelector(`.story-item[data-story-id="${storyId}"]`);
         storyElement.remove();
 
         // Perbarui array data lokal
         allFavoriteStories = allFavoriteStories.filter(story => story.id !== storyId);
         if (allFavoriteStories.length === 0) {
-          renderStories([]); // Tampilkan pesan kosong jika semua sudah dihapus
+          renderStories([]);
         }
         
         SweetAlert.showSuccess('Cerita dihapus dari favorit.');
       }
     });
 
-    // --- Logika untuk Pencarian (Search) ---
     searchInput.addEventListener('input', (event) => {
       const query = event.target.value.toLowerCase();
       const filteredStories = allFavoriteStories.filter(
