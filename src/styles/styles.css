@@ -224,8 +224,38 @@ footer {
   border-bottom: 1px solid #eee;
   cursor: pointer;
   transition: background-color 0.2s;
+  align-items: center;
 }
 
+.story-item__content {
+  flex-grow: 1;
+}
+
+.favorite-button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.favorite-button:hover {
+  background-color: #f0f0f0;
+  border-color: var(--primary-blue);
+}
+
+.favorite-button .fa-heart {
+  color: var(--danger-red);
+  font-size: 1.2rem;
+}
 .story-item:hover,
 .story-item:focus {
   background-color: #e7f3fe;
@@ -318,6 +348,19 @@ footer {
 .submit-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.favorites-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.empty-message, .error-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
 }
 
 /* Camera & Feedback Styles */
