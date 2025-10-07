@@ -138,7 +138,7 @@ export default class AddStoryPage {
   }
 
   async _compressImage(file) {
-    const maxSize = 1000000; // 1 MB
+    const maxSize = 1000000; 
     if (file.size <= maxSize) return file;
 
     return new Promise((resolve, reject) => {
@@ -202,7 +202,6 @@ export default class AddStoryPage {
         setTimeout(() => { window.location.hash = '#/'; }, 1500);
         
       } catch (error) {
-        // Cek apakah error karena offline
         if (!navigator.onLine || error.message.includes('Failed to fetch')) {
           SweetAlert.close();
           try {
@@ -222,7 +221,6 @@ export default class AddStoryPage {
             submitButton.disabled = false;
           }
         } else {
-          // Jika error lain (bukan karena offline)
           SweetAlert.showError(`Gagal menambahkan cerita: ${error.message}`);
           submitButton.disabled = false;
         }

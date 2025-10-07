@@ -1,10 +1,17 @@
-const common = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
-  // ATURAN CSS KHUSUS UNTUK PRODUKSI ADA DI SINI
+
+  // --- TAMBAHAN PENTING UNTUK DEPLOYMENT ---
+  // Menentukan base path untuk semua aset saat di-build untuk produksi.
+  output: {
+    publicPath: '/STORYMAP-APP/', // <-- ❗ GANTI DENGAN NAMA REPO ANDA
+  },
+  
+  // Aturan CSS khusus untuk produksi (membuat file CSS terpisah)
   module: {
     rules: [
       {
@@ -17,7 +24,6 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    // CleanWebpackPlugin sudah tidak diperlukan karena ada 'output.clean: true'
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
   ],
 });

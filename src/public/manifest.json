@@ -2,7 +2,7 @@
   "name": "StoryMap - Bagikan Cerita Anda",
   "short_name": "StoryMap",
   "description": "Aplikasi PWA untuk berbagi cerita lokasi Anda di peta interaktif.",
-  "start_url": "/index.html",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ECF0F1",
   "theme_color": "#2C3E50",
