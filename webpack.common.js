@@ -10,11 +10,10 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'docs'),
-    clean: true, // Ini menggantikan CleanWebpackPlugin
+    clean: true,
   },
   module: {
     rules: [
-      // ATURAN UNTUK JAVASCRIPT (BABEL) KITA PINDAHKAN KE SINI
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -27,12 +26,10 @@ module.exports = {
           },
         ],
       },
-      // ATURAN UNTUK GAMBAR
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
-      // ATURAN CSS DIHAPUS DARI SINI
     ],
   },
   plugins: [

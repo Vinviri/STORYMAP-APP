@@ -4,14 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
-
-  // --- TAMBAHAN PENTING UNTUK DEPLOYMENT ---
-  // Menentukan base path untuk semua aset saat di-build untuk produksi.
   output: {
-    publicPath: '/STORYMAP-APP/', // <-- ❗ GANTI DENGAN NAMA REPO ANDA
+    publicPath: '/STORYMAP-APP/',
   },
-  
-  // Aturan CSS khusus untuk produksi (membuat file CSS terpisah)
   module: {
     rules: [
       {

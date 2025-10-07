@@ -1,15 +1,11 @@
-/* eslint-disable no-restricted-globals */
-
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 
-// Precaching App Shell
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Caching untuk API (Strategi NetworkFirst)
 registerRoute(
   ({ url }) => url.href.startsWith('https://story-api.dicoding.dev/v1/stories'),
   new NetworkFirst({
@@ -20,7 +16,6 @@ registerRoute(
   }),
 );
 
-// Caching untuk Gambar dari API (Strategi CacheFirst)
 registerRoute(
   ({ request }) => request.destination === 'image',
   new CacheFirst({
@@ -29,23 +24,19 @@ registerRoute(
       new CacheableResponsePlugin({ statuses: [0, 200] }),
       new ExpirationPlugin({
         maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Hari
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   }),
 );
 
-// Logika Push Notification dengan perbaikan try...catch
 self.addEventListener('push', (event) => {
   console.log('Push event received.');
   
   let data;
-  // --- PERBAIKAN DIMULAI DI SINI ---
   try {
-    // Coba parsing sebagai JSON
     data = event.data.json();
   } catch (e) {
-    // Jika gagal, anggap sebagai teks biasa
     data = {
       title: 'Notifikasi Baru',
       options: {
@@ -53,7 +44,6 @@ self.addEventListener('push', (event) => {
       },
     };
   }
-  // --- PERBAIKAN SELESAI ---
 
   const { title } = data;
   const { options } = data;

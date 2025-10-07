@@ -10,12 +10,11 @@ module.exports = merge(common, {
     client: {
       overlay: {
         errors: true,
-        warnings: false, // Set 'warnings' ke false agar tidak terganggu warning Workbox
+        warnings: false,
       },
     },
-    watchFiles: ['src/**/*'], // Otomatis reload jika ada perubahan di folder src
+    watchFiles: ['src/**/*'],
   },
-  // ATURAN CSS KHUSUS UNTUK DEVELOPMENT ADA DI SINI
   module: {
     rules: [
       {
